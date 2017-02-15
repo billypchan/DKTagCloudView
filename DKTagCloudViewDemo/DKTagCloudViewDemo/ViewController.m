@@ -31,7 +31,7 @@
                                                                               style:UIBarButtonItemStylePlain
                                                                              target:self
                                                                              action:@selector(regenerate:)];
-    self.tagCloudView.maxFontSize = 20;
+    self.tagCloudView.maxFontSize = 40;
     self.tagCloudView.titls = @[
                                 @"DKTagCloudView",
                                 @"minFontSize",

@@ -51,6 +51,10 @@
     return [UIFont systemFontOfSize:rand() % self.maxFontSize + self.minFontSize];
 }
 
+- (UIFont *)sizeRatioFont:(float)ratio {
+    return [UIFont systemFontOfSize:ratio * (self.maxFontSize - self.minFontSize) + self.minFontSize];
+}
+
 - (CGRect)randomFrameForLabel:(UILabel *)label {
     [label sizeToFit];
     CGFloat maxWidth = self.bounds.size.width - label.bounds.size.width;
@@ -80,7 +84,16 @@
     [self.labels makeObjectsPerformSelector:@selector(removeFromSuperview)];
     [self.labels removeAllObjects];
     
+    ///TODO: calc max/min length
+    
     int i = 0;
+    
+
+    int maxLength= [[self.titls valueForKeyPath: @"@max.length"] intValue];
+    int minLength= [[self.titls valueForKeyPath: @"@min.length"] intValue];
+    float diff = maxLength - minLength;
+
+    
     for (NSString *title in self.titls) {
         assert([title isKindOfClass:[NSString class]]);
         
@@ -88,7 +101,13 @@
         label.tag = i++;
         label.text = title;
         label.textColor = [self randomColor];
-        label.font = [self randomFont];
+        
+        
+        float delta = label.text.length - minLength;
+        float ratio = delta/diff;
+        
+        label.font = [self sizeRatioFont:ratio];
+//        label.font = [self randomFont];
         
         do {
             label.frame = [self randomFrameForLabel:label];
