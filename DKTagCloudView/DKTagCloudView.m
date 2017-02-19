@@ -27,8 +27,7 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     
-    self.sizeRelatedToLength = false;
-    self.useTitleWeights = false;
+    self.labelSizeType = kRandom;
     
     self.userInteractionEnabled = YES;
     self.minFontSize = 14;
@@ -87,15 +86,15 @@
     [self.labels makeObjectsPerformSelector:@selector(removeFromSuperview)];
     [self.labels removeAllObjects];
     
-
-    if (self.useTitleWeights == true) {
+    
+    if (self.labelSizeType == kWeighted) {
         
         int maxWeight= [[self.titleWeights valueForKeyPath: @"@max.weight"] intValue];
         int minWeight= [[self.titleWeights valueForKeyPath: @"@min.weight"] intValue];
         float diff = maxWeight - minWeight;
-
+        
         int i = 0;
-
+        
         for (NSDictionary *titleWeight in self.titleWeights) {
             assert([titleWeight isKindOfClass:[NSDictionary class]]);
             UILabel *label = [[UILabel alloc] init];
@@ -107,7 +106,7 @@
             float delta = [titleWeight[@"weight"] intValue] - minWeight;
             float ratio = delta/diff;
             
-                label.font = [self sizeRatioFont:ratio];
+            label.font = [self sizeRatioFont:ratio];
             
             do {
                 label.frame = [self randomFrameForLabel:label];
@@ -119,7 +118,7 @@
             UITapGestureRecognizer *tagGestue = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleGesture:)];
             [label addGestureRecognizer:tagGestue];
             label.userInteractionEnabled = YES;
-
+            
         }
     }
     else {
@@ -131,41 +130,34 @@
         int maxLength= [[self.titls valueForKeyPath: @"@max.length"] intValue];
         int minLength= [[self.titls valueForKeyPath: @"@min.length"] intValue];
         float diff = maxLength - minLength;
-    for (NSString *title in self.titls) {
-        assert([title isKindOfClass:[NSString class]]);
-        
-        UILabel *label = [[UILabel alloc] init];
-        label.tag = i++;
-        label.text = title;
-        label.textColor = [self randomColor];
-        
-        
-        float delta = label.text.length - minLength;
-        float ratio = delta/diff;
-        
-        if (_sizeRelatedToLength == true) {
-        label.font = [self sizeRatioFont:ratio];
+        for (NSString *title in self.titls) {
+            assert([title isKindOfClass:[NSString class]]);
+            
+            UILabel *label = [[UILabel alloc] init];
+            label.tag = i++;
+            label.text = title;
+            label.textColor = [self randomColor];
+            
+            
+            float delta = label.text.length - minLength;
+            float ratio = delta/diff;
+            
+            label.font = [self randomFont];
+            
+            ///TODO: break after 5 sec., throw
+            do {
+                label.frame = [self randomFrameForLabel:label];
+            } while ([self frameIntersects:label.frame]);
+            
+            [self.labels addObject:label];
+            [self addSubview:label];
+            
+            UITapGestureRecognizer *tagGestue = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleGesture:)];
+            [label addGestureRecognizer:tagGestue];
+            label.userInteractionEnabled = YES;
         }
-        else {
-        label.font = [self randomFont];
-        }
-        
-        ///TODO: break after 5 sec.
-        do {
-            label.frame = [self randomFrameForLabel:label];
-        } while ([self frameIntersects:label.frame]);
-        
-        [self.labels addObject:label];
-        [self addSubview:label];
-        
-        UITapGestureRecognizer *tagGestue = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleGesture:)];
-        [label addGestureRecognizer:tagGestue];
-        label.userInteractionEnabled = YES;
-    }
     }
 }
-
-//-(void)
 
 - (void)handleGesture:(UIGestureRecognizer*)gestureRecognizer {
     UILabel *label = (UILabel *)gestureRecognizer.view;

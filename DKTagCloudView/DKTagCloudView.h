@@ -10,8 +10,13 @@
 
 @interface DKTagCloudView : UIView
 
-@property (nonatomic, assign) Boolean sizeRelatedToLength;
-@property (nonatomic, assign) Boolean useTitleWeights;
+typedef enum LabelSizeType : NSUInteger {
+    kRandom,
+    kWeighted,
+} LabelSizeType;
+
+
+@property (nonatomic, assign) LabelSizeType labelSizeType;
 
 /**
  *  Min font size. Defautls to 14.
