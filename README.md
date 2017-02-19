@@ -5,7 +5,7 @@
 
 Weighted font size example, the label's size is propotional to string's length:
 
-(https://raw.githubusercontent.com/zhangao0086/DKTagCloudView/master/preview_sizeRelatedToLength.png)
+![PNG](https://raw.githubusercontent.com/zhangao0086/DKTagCloudView/master/preview_sizeRelatedToLength.png)
 ## Overview
 DKTagCloudView is a tag clouds view on iOS. It can generate a random and not intersects coordinates.
 This fork supports label size links to custom ratio.
@@ -52,11 +52,11 @@ If you want the size of the label is propertional to their weight, please set la
 
 ``` objective-c
 self.tagCloudView.labelSizeType  = kWeighted;
-self.tagCloudView.titls = @[
-                            @{@"title": @"DKTagCloudView", @"weight" : @14},
-                            @{@"title": @"minFontSize", @"weight" : @11},
-                            :
-                            ];
+self.tagCloudView.titleWeights = @[
+                                   @{@"title": @"DKTagCloudView", @"weight" : @14},
+                                   @{@"title": @"minFontSize", @"weight" : @11},
+                                   :
+                                   ];
 ```
 
 #### Generates:
@@ -76,6 +76,12 @@ self.tagCloudView.titls = @[
 #### Customized:
 
 ``` objective-c
+
+/**
+ *  Label size option. Default is random. When kWeighted is choose, it will read the array from titleWeights property
+ */
+@property (nonatomic, assign) LabelSizeType labelSizeType;
+
 /**
  *  Min font size. Defautls to 14.
  */
