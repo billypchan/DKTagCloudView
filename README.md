@@ -5,7 +5,7 @@
 
 Weighted font size example, the label's size is propotional to string's length:
 
-![PNG](https://raw.githubusercontent.com/zhangao0086/DKTagCloudView/master/preview_sizeRelatedToLength.png)
+![PNG](https://raw.githubusercontent.com/billypchan/DKTagCloudView/master/preview_sizeRelatedToLength.png)
 ## Overview
 DKTagCloudView is a tag clouds view on iOS. It can generate a random and not intersects coordinates.
 This fork supports label size links to custom ratio.
