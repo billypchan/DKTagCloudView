@@ -10,6 +10,9 @@
 
 @interface DKTagCloudView : UIView
 
+@property (nonatomic, assign) Boolean sizeRelatedToLength;
+@property (nonatomic, assign) Boolean useTitleWeights;
+
 /**
  *  Min font size. Defautls to 14.
  */
@@ -37,6 +40,7 @@
 @property (nonatomic, copy) NSArray *randomColors;
 
 @property (nonatomic, copy) NSArray *titls; // @[ NSString... ]
+@property (nonatomic, copy) NSArray *titleWeights; // @[ (NSString, Int)... ]
 
 /**
  *  Callback. Index start at 0.
