@@ -1,6 +1,11 @@
 # DKTagCloudView
 ![GIF](https://raw.githubusercontent.com/zhangao0086/DKTagCloudView/master/preview1.gif)
 ![GIF](https://raw.githubusercontent.com/zhangao0086/DKTagCloudView/master/preview2.gif)
+
+
+Weighted font size example, the label's size is propotional to string's length:
+
+(https://raw.githubusercontent.com/zhangao0086/DKTagCloudView/master/preview_sizeRelatedToLength.png)
 ## Overview
 DKTagCloudView is a tag clouds view on iOS. It can generate a random and not intersects coordinates.
 This fork supports label size links to custom ratio.
@@ -9,22 +14,10 @@ This fork supports label size links to custom ratio.
 
 ### Installation with CocoaPods
 
-``` bash
-$ pod search DKTagCloudView
-
--> DKTagCloudView (1.0.0)
-   A tag clouds view on iOS.t can generate a random and not intersects
-   coordinates.
-   pod 'DKTagCloudView', '~> 1.0.0'
-   - Homepage: https://github.com/zhangao0086/DKTagCloudView
-   - Source:   https://github.com/zhangao0086/DKTagCloudView.git
-   - Versions: 1.0.0 [master repo]
-```
-
 Edit your Podfile and add DKTagCloudView:
 
 ``` bash
-pod 'DKCarouselView', '~> x.x.x'
+pod 'DKTagCloudView', :git => 'https://github.com/billypchan/DKTagCloudView.git'
 ```
 
 Add `#import "DKTagCloudView.h"` to the top of classes that will use it.  
@@ -53,6 +46,16 @@ self.tagCloudView.titls = @[
                             @"Max font size",
                             @"DKTagCloudViewDemo",
                             @"This is a test"
+                            ];
+```
+If you want the size of the label is propertional to their weight, please set labelSizeType properties to kWeighted and assign  array to titleWeights:
+
+``` objective-c
+self.tagCloudView.labelSizeType  = kWeighted;
+self.tagCloudView.titls = @[
+                            @{@"title": @"DKTagCloudView", @"weight" : @14},
+                            @{@"title": @"minFontSize", @"weight" : @11},
+                            :
                             ];
 ```
 
