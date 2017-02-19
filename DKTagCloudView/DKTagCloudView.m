@@ -107,12 +107,7 @@
             float delta = [titleWeight[@"weight"] intValue] - minWeight;
             float ratio = delta/diff;
             
-            if (_sizeRelatedToLength == true) {
                 label.font = [self sizeRatioFont:ratio];
-            }
-            else {
-                label.font = [self randomFont];
-            }
             
             do {
                 label.frame = [self randomFrameForLabel:label];
