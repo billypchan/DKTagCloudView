@@ -82,7 +82,7 @@
     return _labels;
 }
 
-- (void)generate {
+- (void)generate :(void (^) (UILabel *label))labelCreatedHandler {
     [self.labels makeObjectsPerformSelector:@selector(removeFromSuperview)];
     [self.labels removeAllObjects];
     
@@ -118,7 +118,7 @@
             UITapGestureRecognizer *tagGestue = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleGesture:)];
             [label addGestureRecognizer:tagGestue];
             label.userInteractionEnabled = YES;
-            
+             labelCreatedHandler(label);
         }
     }
     else {
@@ -155,6 +155,7 @@
             UITapGestureRecognizer *tagGestue = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleGesture:)];
             [label addGestureRecognizer:tagGestue];
             label.userInteractionEnabled = YES;
+            labelCreatedHandler(label);
         }
     }
 }

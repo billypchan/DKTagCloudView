@@ -52,6 +52,6 @@ typedef enum LabelSizeType : NSUInteger {
  */
 @property (nonatomic, copy) void (^tagClickBlock)(NSString *title, NSInteger index);
 
-- (void)generate;
+- (void)generate :(void (^) (UILabel *label))labelCreatedHandler;
 
 @end
